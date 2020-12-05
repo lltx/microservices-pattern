@@ -1,0 +1,13 @@
+server:
+  port: 8050
+
+# 超时参数配置
+resilience4j:
+  timelimiter:
+    instances:
+      createOrder: # 接口名称
+        timeoutDuration: 5s #超时时间
+        cancelRunningFuture: true #取消正在运行的任务
+      pay: # 接口名称
+        timeoutDuration: 3s #超时时间
+        cancelRunningFuture: true #取消正在运行的任务
