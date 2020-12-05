@@ -1,0 +1,10 @@
+server:
+  port: 8050
+  tomcat:
+    threads:
+      max: 5 #限制应用只能处理5 个并发，方便测试
+
+resilience4j.bulkhead:
+  instances:
+    createOrder:  # 限制此接口只能使用两个
+      maxConcurrentCalls: 2
