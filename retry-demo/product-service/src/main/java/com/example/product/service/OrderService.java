@@ -1,6 +1,6 @@
 package com.example.product.service;
 
-import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class OrderService {
      * name: 指定接口超时配置名称
      * fallbackMethod: 超时后降级方法
      */
-    @Bulkhead(name = "createOrder", fallbackMethod = "getError")
+    @Retry(name = "createOrder", fallbackMethod = "getError")
     public CompletableFuture<String> createOrder() {
         return CompletableFuture.supplyAsync(() -> restTemplate.getForEntity("http://localhost:8070/createOrder"
                 , String.class).getBody());

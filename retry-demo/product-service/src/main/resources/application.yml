@@ -1,0 +1,9 @@
+server:
+  port: 8050
+
+resilience4j.retry:
+  instances:
+    ratingService:
+      maxRetryAttempts: 1 #重试策略
+      retryExceptions:   #针对哪些异常进行重试
+        - org.springframework.web.client.HttpServerErrorException
