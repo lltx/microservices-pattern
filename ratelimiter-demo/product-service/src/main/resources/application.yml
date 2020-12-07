@@ -1,0 +1,9 @@
+server:
+  port: 8050
+
+resilience4j.ratelimiter:
+  instances:
+    createOrder:
+      limitForPeriod: 5        # 最多运行多少个
+      limitRefreshPeriod: 10s  #时间窗限制 10s
+      timeoutDuration: 0      #立即返回
