@@ -1,0 +1,16 @@
+server:
+  port: 8050
+
+resilience4j:
+  retry:   #重试策略
+    instances:
+      ratingService:
+        maxRetryAttempts: 3
+  circuitbreaker:  #断路策略
+    instances:
+      createOrder:
+        slidingWindowType: COUNT_BASED   #定义断路器监控窗口类型： 根据时间窗内请求数量
+        slidingWindowSize: 100           #监控时间窗内 监控100个请求
+        permittedNumberOfCallsInHalfOpenState: 10   #半开状态， 发送到目标服务的请求数量
+        waitDurationInOpenState: 10     #当断路器打开后，10秒后开始发送部分流量监控目标状态
+        failureRateThreshold: 60        # 故障阈值数量，如上处于半开状态 请求目标服务失败的阈值
